@@ -14,16 +14,16 @@ Danh sách là **định hướng**: khi soạn được phép đổi/bổ sung 
 | I02 Tree recursion | ✅ | 10 | |
 | I03 BST | ✅ | 10 | |
 | I04 Heap | ✅ | 10 | `Heap<T>` tổng quát export trong solutions.ts |
-| I05 Graph & BFS | ⬜ | 10 | |
-| I06 DFS & connectivity | ⬜ | 10 | |
-| I07 Topological sort | ⬜ | 8 | |
-| I08 Union-Find | ⬜ | 8 | |
-| I09 Backtracking | ⬜ | 10 | |
-| I10 Greedy & intervals | ⬜ | 10 | |
-| I11 Monotonic stack/deque | ⬜ | 8 | |
-| I12 Trie | ⬜ | 8 | |
-| I13 Bit manipulation | ⬜ | 10 | |
-| I14 Math | ⬜ | 10 | |
+| I05 Graph & BFS | ✅ | 10 | Danh sách bài đúng kế hoạch. ex06 (openLock) không đo Perf (không gian trạng thái cố định 10⁴) |
+| I06 DFS & connectivity | ✅ | 10 | Đúng kế hoạch. Test cố ý có đường thẳng 10⁵ đỉnh / đảo "rắn" để loại DFS đệ quy; ex08 so `unordered` (không sắp trong từng cặp [r,c]) |
+| I07 Topological sort | ✅ | 8 | Đúng kế hoạch (đỉnh/môn đánh số từ 0 ở ex05). ex07 dùng `String[][] deps` (đã thử Python/Java) |
+| I08 Union-Find | ✅ | 8 | ex01: `find` có thể trả đại diện bất kỳ → `compare` kiểm tra nhất quán; ex02 đánh số từ 0 (n cạnh, n đỉnh); ex04 không đo Perf (26 chữ cái) |
+| I09 Backtracking | ✅ | 10 | Đúng kế hoạch; ex09 Perf ở n = 13; ex10 không đo Perf; thứ tự phần tử trong từng đáp án được đề quy định (so `unordered` ở mức ngoài) |
+| I10 Greedy & intervals | ✅ | 10 | `candy` đổi `int` → `long` (tổng 5·10⁹ ở n = 10⁵); ex04 không đo Perf; README có mục "khi nào greedy sai" (phản ví dụ) |
+| I11 Monotonic stack/deque | ✅ | 8 | `largestRectangleArea` và `trap` đổi `int` → `long`; ex06 có test bẫy 2⁵³ (nhân modulo) |
+| I12 Trie | ✅ | 8 | Đúng kế hoạch; ex03 Perf chỉ bắt bản rất chậm (ghi trong đề); ex08 dùng `char` (đã thử Python/Java) |
+| I13 Bit manipulation | ✅ | 10 | Đúng kế hoạch; `isPowerOfTwo` nhận `long` tới 2⁵³ − 1 (bẫy `n & (n−1)` khi n ≥ 2³² trong TS); phần lớn bài không đo Perf |
+| I14 Math | ✅ | 10 | `modPow`: `exp`, `base` ≤ 2⁵³ − 1 (không phải 10¹⁸, vì input JSON → `number`); `nextCollision`: a, b ≤ 10⁷, t ≤ 10¹⁵ |
 | A01 DP I: nền tảng | ✅ | 10 | `mincostTickets` mở rộng: ngày tới 10⁹, n ≤ 10⁵ (DP theo chỉ số + two pointers); `deleteAndEarn` n ≤ 10⁵ |
 | A02 DP II: 1D & sequence | ✅ | 10 | `change`, `numDecodings` trả mod 10⁹+7 (đề có n lớn); `maxProduct` ràng buộc mỗi phần tử có trị tuyệt đối ≤ 2 để tích vừa int; `wordBreak` độ dài s ≤ 10⁵, từ ≤ 20 ký tự |
 | A03 DP III: 2D & string | ✅ | 10 | `uniquePaths`, `uniquePathsWithObstacles` mod 10⁹+7 (lưới 1000²); `diffLines` đặc tả quy tắc tie thành thuật toán duy nhất (xóa trước thêm); `longestPalindrome` dùng compare |
@@ -36,10 +36,34 @@ Danh sách là **định hướng**: khi soạn được phép đổi/bổ sung 
 | A10 Binary search on answer | ✅ | 8 | `splitArray` trả `long` (n, nums tới 10⁵, 10⁹); `minmaxGasDist` k tới 10⁹ (mô phỏng heap không khả thi), sai số tuyệt đối 10⁻⁶ |
 | A11 Sweep line | ✅ | 8 | `canAccommodate` đổi thành đơn đặt phòng có số phòng yêu cầu `[checkIn, checkOut, roomsNeeded]` (có trọng số, khác `maxConcurrent`); `MyCalendarTwo` không đo Perf (≤ 3000 lần gọi, O(k) mỗi lần) |
 | A12 Amortized & randomized | ✅ | 8 | `reservoirSample` chuyển từ compare sang RNG Park–Miller đặc tả trong đề (so exact, tất định 3 ngôn ngữ); `RandomizedSet` chấm bằng mô phỏng + kiểm tra getRandom không hằng; `quickSelect` Perf dùng mảng 3 giá trị (bắt partition 2-way); `wiggleSortII` kiểm tra bằng compare, gen kiểm tồn tại nghiệm bằng vét cạn |
-| P01–P07 | ⬜ | xem dưới | định dạng đặc biệt |
-| R01–R10 | ⬜ | 5 | phần lớn là class |
-| D01–D10 | ⬜ | 2 + DESIGN.md mẫu | |
-| CAP | ⬜ | 1 class lớn + DESIGN.md | |
+| P01 Pattern recognition | ✅ | 20 đề | README + exercises.md (20 đề) + solutions.md (không có checks.ts) |
+| P02 Interview framework | ✅ | 3 | `solutions.ts` kèm transcript 7 bước; ex03 có test cụm 10⁵ ô (đệ quy tràn stack) |
+| P03 Scale effects trong JS | ✅ | 10 thí nghiệm | `benchOnly`; `experiments.ts` (22 hàm) + `verify.ts`; `solutions.md` ghi số đo thật + Python/Java |
+| P04 Testing & stress test | ✅ | 8 | `bugs/bugNN.{ts,py,java}` là code lỗi (đã kiểm chứng `check` báo SAI); phần stress tự viết không chấm máy |
+| P05 Timed Easy | ✅ | 6 | LC 169, 121, 392, 228, 496, 409 (viết lại bối cảnh) |
+| P06 Timed Medium | ✅ | 5 | LC 621, 863, 909, 523, 334 |
+| P07 Timed Hard | ✅ | 4 | LC 4, 10, 815, 2402 |
+| R01 Cache | ✅ | 5 | LRU, TTL (heap + lazy deletion), hit ratio LRU vs FIFO, PriceCache có invalidate theo category, LRU bằng DLL (`keys()` để kiểm tra thứ tự) |
+| R02 Rate limiting | ✅ | 5 | Fixed/Sliding log/Sliding counter/Token bucket (mili-token nguyên) + `compareLimiters` trả 8 số (allowed + burst thực) |
+| R03 Feed, top-K, stream | ✅ | 5 | ex01 đổi từ hàm `feedPage` sang class `FeedMerger` (để đo được truy vấn lặp); `TopKCounter`, `Trending`, `mergeTimelines` |
+| R04 Scheduler & delayed queue | ✅ | 5 | `DelayQueue`, `retrySchedule(attempts, base, cap, deadline)` (mốc cộng dồn), `TimerWheel`, `nextRun`, `simulateJobQueue` |
+| R05 Dependency resolution | ✅ | 5 | `resolve` (tie-break theo thứ tự khai báo), `findCycle`, `buildLevels`, `initProviders` (kiểu NestJS), `maxSatisfying` |
+| R06 Search & autocomplete | ✅ | 5 | ex01 là `Suggest(k)` có weight (tránh trùng `Autocomplete` của I12); `SearchIndex`, `fuzzyMatch`, `searchVietnamese`, `BKTree` |
+| R07 Probabilistic DS | ✅ | 5 | hash đặc tả `g = fmix32(fnv1a32)`; `falsePositiveRate` gộp thành `measureBloom`; `bloomParams` trả `long[]` |
+| R08 Consistent hashing & Merkle | ✅ | 5 | `diffBlocks` thay bằng class `MerkleSync` (update O(log n)) để perf phân biệt được |
+| R09 Diff, dedup & stream | ✅ | 5 | ex01 là `myersDistance` (tránh trùng `diffLines` của A03); `Dedup`, `P95Window`, `sessionize`, `sampleLog` (LCG đặc tả) |
+| R10 Geo & spatial | ✅ | 5 | `geohash`, `haversineKm`, `GridIndex`, `kNearest`, `DriverIndex` |
+| D01 Phương pháp | ✅ | 2 + DESIGN.md | `MaxStack` (LC 716) + `FreqStack` (LC 895, 🔴); DESIGN mẫu đầy đủ 7 bước cho MaxStack |
+| D02 LRU & LFU | ✅ | 2 + DESIGN.md | `LRUCache` (DLL), `LFUCache`; DESIGN mẫu cho LRU |
+| D03 Hit counter & rate limiter | ✅ | 2 + DESIGN.md | `HitCounter`, `PerUserLimiter(int limit, long windowMs, int maxUsers)` (🔴); đáp án dùng DLL (xem ghi chú trong solutions: `Map.keys().next()` chậm hơn) |
+| D04 Time-based KV | ✅ | 2 + DESIGN.md | `TimeMap`, `SnapshotArray` (🔴, “cấu hình có phiên bản”) |
+| D05 RandomizedCollection & iterators | ✅ | 3 + DESIGN.md | thêm bài thứ 3: `RandomizedCollection` (compare mô phỏng + thống kê), `PeekingIterator`, `ZigzagIterator` (🔴); ex02/ex03 không có Perf (ghi “tự giác” trong exercises) |
+| D06 Leaderboard | ✅ | 2 + DESIGN.md | `Leaderboard` (`long top(int K)`), `RankBoard`; cài `SortedKeys` (danh sách chia khối) trong solutions; thêm case lớn để chạm đường tách khối |
+| D07 Router / file system | ✅ | 2 + DESIGN.md | `Router` (🔴, ex01), `FileSystem` (ex02, LC 588) |
+| D08 Task scheduler & timer | ✅ | 2 + DESIGN.md | `TaskScheduler` (thêm `scheduleEvery` cho việc lặp lại, 🔴), `TaskManager` (LC 3408); dùng `Heap` I04 |
+| D09 Ordered map | ✅ | 2 + DESIGN.md | `OrderedMap` bằng `IndexedSkipList` có span (export để CAP dùng) + `MyCalendar` (LC 729, 🔴); README có bảng bench skip list vs mảng sort |
+| D10 Text buffer & undo/redo | ✅ | 2 + DESIGN.md | `TextEditor` (LC 2296), `UndoRedo(int maxHistory)` (🔴); lệnh `"+text"` / `"-k"` |
+| CAP mini-Redis | ✅ | 2 + DESIGN.md | `MiniKV` (chuỗi + TTL + LRU) rồi `MiniRedis` (thêm list, sorted set, kiểu khóa); `setTime(now)` thay cho `now` từng lệnh; `del` đổi tên `delete` (từ khóa Python) |
 
 ---
 
@@ -115,7 +139,7 @@ README: chứng minh bằng exchange argument, sort theo đầu/cuối khoảng,
 5. `int findMinArrowShots(int[][] points)` — LC 452.
 6. `int canCompleteCircuit(int[] gas, int[] cost)` — LC 134.
 7. `List<Integer> partitionLabels(String s)` — LC 763.
-8. `int candy(int[] ratings)` — LC 135.
+8. `long candy(int[] ratings)` — LC 135 (đổi sang `long`: tổng tới 5·10⁹).
 9. 🔴 `int maxEvents(int[][] events)` — LC 1353 (greedy + heap).
 10. 🔴 `int scheduleCourse(int[][] courses)` — LC 630.
 
@@ -123,8 +147,8 @@ README: chứng minh bằng exchange argument, sort theo đầu/cuối khoảng,
 README: stack tăng/giảm dần, "phần tử lớn hơn kế tiếp", vì sao O(n), diện tích histogram, deque cho max cửa sổ trượt, đóng góp của mỗi phần tử (sum of mins).
 1. `int[] nextGreaterElements(int[] nums)` — LC 503 (vòng).
 2. `int[] dailyTemperatures(int[] temperatures)` — LC 739.
-3. `int largestRectangleArea(int[] heights)` — LC 84.
-4. `int trap(int[] height)` — LC 42.
+3. `long largestRectangleArea(int[] heights)` — LC 84 (đổi sang `long`: diện tích tới 10¹⁴).
+4. `long trap(int[] height)` — LC 42 (đổi sang `long`: tổng tới 10¹⁰).
 5. `int[] maxSlidingWindow(int[] nums, int k)` — LC 239.
 6. `int sumSubarrayMins(int[] arr)` — LC 907 (mod 10⁹+7).
 7. 🔴 `class StockSpanner { StockSpanner(); int next(int price) }` — LC 901.
@@ -158,14 +182,14 @@ README: biểu diễn nhị phân, bù hai, `& | ^ ~ << >> >>>`, JS int32 + `>>>
 README: Euclid, sàng Eratosthenes, lũy thừa nhanh + modulo, nghịch đảo modulo (Fermat), nCk mod p, bẫy 2⁵³ khi nhân modulo trong JS (BigInt / nhân tách), Java `long` tràn khi nhân 2 số ~10⁹·10⁹ vẫn vừa nhưng 10¹⁰·10¹⁰ thì không.
 1. `int gcdOfArray(int[] nums)`.
 2. `int countPrimes(int n)` — LC 204 (n ≤ 5·10⁶).
-3. `int modPow(long base, long exp, int mod)` — exp tới 10¹⁸ (TS: BigInt hoặc mulmod an toàn).
+3. `int modPow(long base, long exp, int mod)` — base, exp ≤ 2⁵³ − 1 (input JSON là `number`, không biểu diễn chính xác tới 10¹⁸); TS: BigInt hoặc mulmod an toàn.
 4. `int nCrMod(int n, int r)` — mod 10⁹+7, n ≤ 10⁶.
 5. `boolean isHappy(int n)` — LC 202.
 6. `String toBase(long num, int base)` — 2 ≤ base ≤ 36, số âm.
 7. `int trailingZeroes(int n)` — LC 172.
 8. `String fractionToDecimal(int numerator, int denominator)` — LC 166.
 9. 🔴 `boolean luhnValid(String number)` — kiểm tra số thẻ/mã đơn bằng Luhn.
-10. 🔴 `long nextCollision(long a, long b, long t)` — hai cron chạy mỗi a và b phút từ 0, lần trùng đầu tiên ≥ t.
+10. 🔴 `long nextCollision(long a, long b, long t)` — hai cron chạy mỗi a và b phút từ 0, lần trùng đầu tiên ≥ t (a, b ≤ 10⁷, t ≤ 10¹⁵).
 
 ## Tier A
 
@@ -264,6 +288,8 @@ README: state → transition → base → thứ tự tính; memo vs tabulation; 
 - **R10 Geo & spatial:** `String geohash(double lat, double lon, int precision)`; `double haversineKm(...)`; `class GridIndex { add(int id, double x, double y); move(...); List<Integer> withinRadius(double x, double y, double r) }`; `int[] kNearest(int[][] pts, int x, int y, int k)`; 🔴 `class DriverIndex` (cập nhật vị trí liên tục + truy vấn tài xế gần nhất).
 
 ## Tier D (mỗi module: `DESIGN.md` mẫu theo khung 7 bước của skill dsa-design + 2 bài class có checks)
+
+> Đã soạn xong (nhánh `content/d`): xem bảng trạng thái và `tools/reports/d.md`. `DESIGN.md` nằm trong chính thư mục `lessons/<ID>-<slug>/` (khác `designs/` là nơi người học nộp thiết kế của họ).
 
 - **D01 Phương pháp:** `MaxStack` (LC 716) + DESIGN.md mẫu đầy đủ làm ví dụ cho các module sau.
 - **D02 LRU & LFU:** `LRUCache` bằng DLL tự cài; `LFUCache` (LC 460).
