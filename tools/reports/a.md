@@ -28,8 +28,8 @@ Branch làm việc: `claude/content-a-dsa-modules-yxo9m9` (branch do hệ thốn
 - `DSA_PERF_FACTOR=1 node tools/check.ts --all A… --src solutions`: **102/102 đúng**, chạy hai lần liên tiếp đều xanh. Không bài nào chỉ qua nhờ `DSA_PERF_FACTOR`.
 - `DSA_PERF_FACTOR=3 node tools/check.ts --all --src solutions --quiet` (toàn repo): **261 đúng · 0 sai** (159 cũ + 102 mới), ~57 giây.
 - `npx tsc --noEmit`: sạch.
-- Tỉ lệ giới hạn/thời gian ref ở factor 1 (đo thật): thấp nhất 4.0× (A12 ex05, sau đó đã nới `n` và giới hạn: ref ≈ 150–170 ms, giới hạn 700 ms, bản ngây thơ ≈ 2.4 s); hầu hết các bài khác ≥ 5.5×. Các bài ở 5–7×: A10 ex04, A04 ex07, A09 ex08, A01 ex10, A03 ex10, A10 ex03.
-- Lưu ý khi dùng `DSA_PERF_FACTOR=3`: A12 ex05 (skip list) có bản ngây thơ ≈ 2.4 s, còn giới hạn nhân ba là 2.1 s ⇒ gần như không phân biệt được. Chỉ dùng factor 3 để kiểm chứng đáp án mẫu, đừng dùng để chấm học viên.
+- Tỉ lệ giới hạn/thời gian ref ở factor 1 (đo thật, lần chạy cuối): A12 ex05 ref ≈ 150–280 ms, giới hạn 1000 ms (bản ngây thơ ≈ 2.4 s); các bài khác đều ≥ 5.5×. Các bài ở 5–7×: A10 ex04, A04 ex07, A09 ex08, A01 ex10, A03 ex10, A10 ex03.
+- Lưu ý khi dùng `DSA_PERF_FACTOR=3`: A12 ex05 (skip list) có bản ngây thơ ≈ 2.4 s, còn giới hạn nhân ba là 3 s ⇒ gần như không phân biệt được. Chỉ dùng factor 3 để kiểm chứng đáp án mẫu, đừng dùng để chấm học viên.
 
 ### Bản sai Big-O bị Perf bắt (thử thật)
 | Module/bài | Bản ngây thơ | Kết quả |
@@ -39,7 +39,9 @@ Branch làm việc: `claude/content-a-dsa-modules-yxo9m9` (branch do hệ thốn
 | A01 ex01 | đệ quy O(3ⁿ) | quá 30 s ở phần cases (n = 37) ❌ |
 | A02 ex03 | LIS O(n²) | Perf ❌ |
 | A02 ex04 | word break quét mọi j | quá 30 s ở cases ❌ |
-| A03 ex08 / A04 ex08 | khác nhau (xem dưới) | A04 ex08: trải phẳng từng tờ → Perf ❌ (1309 ms > 200 ms); A04 ex01: duyệt xuôi cho 0/1 → sai ở case "mỗi vật một lần" ❌ |
+| A04 ex08 | trải phẳng từng tờ | Perf ❌ (1309 ms > 200 ms) |
+| A04 ex01 | duyệt xuôi cho 0/1 (thành unbounded) | sai ở case "mỗi vật một lần" ❌ |
+| A05 ex07 | duyệt 1..n đếm chữ số | quá 30 s ở cases (n = 10⁹) ❌ |
 | A06 ex01 | Dijkstra quét mảng O(n²) | Perf ❌ |
 | A07 ex02 | Kruskal trên n²/2 cạnh | Perf ❌ (1515 ms > 300 ms) |
 | A08 ex01, ex08 | quét thô mỗi truy vấn; list sự kiện quét lại | Perf ❌ |
@@ -48,7 +50,7 @@ Branch làm việc: `claude/content-a-dsa-modules-yxo9m9` (branch do hệ thốn
 | A11 ex04 | duyệt toàn bộ danh sách mỗi lần book | Perf ❌ (1877 ms > 500 ms) |
 | A12 ex01, ex03, ex04, ex05 | quickselect 2-way; sao chép mỗi lần push; `indexOf/splice`; mảng không sắp | Perf ❌ cả bốn |
 
-Các bài chưa thử bản sai Big-O: A05 (đề giới hạn cố định nhỏ, Perf chủ yếu bắt vét cạn mũ), A02 ex01/02, A03 ex01–07/09/10 (chỉ có bản đệ quy không memo — bị chặn bởi case lớn), A04 ex02–07, A06 ex02–08, A07 ex01/03–08, A08 ex02–07, A09 ex02–04/06–08, A10 ex02–08, A11 ex01–03/05–08. Mỗi module đều có ít nhất một bài đã thử như bảng trên.
+Các bài còn lại chưa thử bản ngây thơ riêng; mỗi module A01–A12 có ít nhất một bài đã thử như bảng trên. Nhiều phép thử bị bắt ở phần *cases* (quá 30 s) thay vì Perf, vì case cố định lớn (cố ý có `expected` công thức) chạy trước Perf; kết quả vẫn là ❌.
 
 ### Thử Python / Java (kiểu `sig` mới hoặc class)
 Đã viết nhanh bản Python hoặc Java vào `answers/`, chạy `check --lang py|java`, rồi xóa:
