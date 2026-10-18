@@ -28,7 +28,7 @@
 | 10⁵ | 10,8 ms | 2,8 ms | 3,9× | 10,0 MB |
 | 10⁶ | 141,1 ms | 22,9 ms | 6,2× | 89,4 MB |
 
-**Giải thích:** AoS là mảng con trỏ tới đối tượng nằm rải rác (mỗi bước đọc = một lần nhảy bộ nhớ, đối tượng 4 trường ≈ 56 byte + con trỏ); SoA đọc tuần tự 4 mảng `Float64Array` liên tục (prefetch + cache line đầy đủ). Khoảng cách **tăng theo n** vì khi dữ liệu vượt cache L2/L3, đối tượng rải rác chịu cache miss.
+**Giải thích:** AoS là mảng con trỏ tới đối tượng nằm rải rác (mỗi bước đọc = một lần nhảy bộ nhớ; heap đỉnh đo được ≈ 89 byte/phần tử); SoA đọc tuần tự 4 mảng `Float64Array` liên tục (prefetch + cache line đầy đủ). Khoảng cách **tăng theo n** vì khi dữ liệu vượt cache L2/L3, đối tượng rải rác chịu cache miss.
 
 ## 04 · Cấp phát đối tượng trong vòng lặp nóng
 | n | `sumManhattanAlloc` | `sumManhattanInline` | tỉ lệ |
@@ -44,7 +44,7 @@
 | 10⁶ | 4,3 ms | 19,9 ms | **packed chậm hơn 4,6×** | 7,2 vs 19,4 MB |
 | 10⁷ | 76,0 ms | 380,2 ms | packed chậm hơn 5× | 72,9 vs 250,9 MB |
 
-**Giải thích:** hai biến thể khác nhau không chỉ ở "holey": `new Array(n)` **cấp phát trước đúng n ô**, còn `push` phải tăng dung lượng nhiều lần và sao chép (đỉnh heap gấp ≈ 3,5×). Lợi ích cấp phát trước lấn át chi phí kiểm tra lỗ khi đọc. Muốn đo riêng ảnh hưởng của "holey", phải so với một bản packed *cũng* cấp phát trước (ví dụ `Array.from({length: n}, …)`). Bài học: **thí nghiệm có biến gây nhiễu** — luôn tự hỏi "hai bên còn khác nhau ở điểm nào nữa?". Quy tắc thực dụng: biết trước kích thước thì cấp phát trước (hoặc dùng typed array); đừng xóa phần tử giữa mảng bằng `delete`.
+**Giải thích:** hai biến thể khác nhau không chỉ ở "holey": `new Array(n)` **cấp phát trước đúng n ô**, còn `push` phải tăng dung lượng nhiều lần và sao chép (đỉnh heap gấp ≈ 3,4×). Lợi ích cấp phát trước lấn át chi phí kiểm tra lỗ khi đọc. Muốn đo riêng ảnh hưởng của "holey", phải so với một bản packed *cũng* cấp phát trước (ví dụ `Array.from({length: n}, …)`). Bài học: **thí nghiệm có biến gây nhiễu** — luôn tự hỏi "hai bên còn khác nhau ở điểm nào nữa?". Quy tắc thực dụng: biết trước kích thước thì cấp phát trước (hoặc dùng typed array); đừng xóa phần tử giữa mảng bằng `delete`.
 
 ## 06 · Đệ quy sâu 5000 vs vòng lặp
 | n (tổng số bước) | `sumRecursive` | `sumLoop` | tỉ lệ |
@@ -78,7 +78,7 @@
 | 10⁶ | 80,9 ms | 2,6 ms | 41,9 MB |
 | 10⁷ | 2 718 ms | 21,3 ms | 503 MB |
 
-**Giải thích:** `Set` ≈ **50 byte/phần tử** (bảng băm + chuỗi nhập) và **siêu tuyến tính**: số mũ ước lượng 1,53 từ 10⁶ lên 10⁷ (rehash, cache miss, GC). Bảng bit tốn `n/8` byte (1,25 MB ở 10⁷) và tuyến tính. Khi miền giá trị là các số nguyên không quá lớn → bảng bit/`Uint8Array`; khi khóa thưa/chuỗi → `Set` là lựa chọn đúng, nhưng biết nó đắt: 10⁷ phần tử ≈ nửa GB.
+**Giải thích:** `Set` ≈ **50 byte/phần tử** (bảng băm) và **siêu tuyến tính**: số mũ ước lượng 1,53 từ 10⁶ lên 10⁷ (rehash, cache miss, GC). Bảng bit tốn `n/8` byte (1,25 MB ở 10⁷) và tuyến tính. Khi miền giá trị là các số nguyên không quá lớn → bảng bit/`Uint8Array`; khi khóa thưa/chuỗi → `Set` là lựa chọn đúng, nhưng biết nó đắt: 10⁷ phần tử ≈ nửa GB.
 
 ## 10 · Sort rồi đếm vs `Set`
 | n | `uniqueBySort` | `uniqueBySet` |
