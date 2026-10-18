@@ -295,7 +295,7 @@ export const specs: Record<string, Spec> = {
     sig: 'List<List<Integer>> pacificAtlantic(int[][] heights)',
     title: 'Nước chảy ra hai đại dương',
     ref: S.pacificAtlantic,
-    compare: 'unordered-deep',
+    compare: 'unordered', // sắp các cặp [r, c] theo thứ tự bất kỳ, nhưng KHÔNG đảo r/c trong từng cặp
     brute: (h: number[][]) => {
       const R = h.length;
       const C = h[0].length;
