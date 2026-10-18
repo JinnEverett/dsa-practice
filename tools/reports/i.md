@@ -23,7 +23,7 @@ Mỗi module có đủ 4 file: `README.md`, `exercises.md`, `solutions.ts`, `che
 
 Môi trường: Node v24.22.0 (cài bằng `npm i node@24 --prefix /opt/n24`, vì `npm i -g node@24` báo `EEXIST` do Node 22 đã có trong `/opt/node22/bin`), Python 3.13, javac 21.
 
-- `DSA_PERF_FACTOR=3 node tools/check.ts --all --src solutions --quiet` (toàn repo, sau khi xong cả nhóm): **251 đúng · 0 sai · 0 chưa làm**. Các module I05–I14: 94 bài đều ✅.
+- `DSA_PERF_FACTOR=3 node tools/check.ts --all --src solutions --quiet` (toàn repo, sau khi xong cả nhóm): **251 đúng · 0 sai · 0 chưa làm**. Các module I05–I14: 92 bài đều ✅.
 - Chạy lại từng module I05–I14 với `DSA_PERF_FACTOR=1` (không bù): **tất cả ✅**; I05, I07, I08, I12 chạy thêm 2 lượt nữa vẫn ✅. **Không có bài nào chỉ qua nhờ `DSA_PERF_FACTOR`.**
 - `npx tsc --noEmit`: sạch, sau mỗi module.
 - Lưu ý: trong lúc soạn, vài giới hạn Perf ban đầu quá sát (đo lại cho thấy dao động ×2–3 giữa các lần chạy trên VM chia sẻ, ví dụ I05 ex01 từ 69 ms tới 170 ms). Đã nới giới hạn để TS đúng Big-O nhanh hơn giới hạn ≥ 5× (thường 10–50×); không dựa vào `DSA_PERF_FACTOR`.
