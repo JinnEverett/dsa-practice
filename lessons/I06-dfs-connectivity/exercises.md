@@ -77,7 +77,7 @@ String[] captureRegions(String[] board)
 ```java
 List<List<Integer>> pacificAtlantic(int[][] heights)
 ```
-- Ràng buộc: `1 ≤ R, C ≤ 200` (tổng ô tới `10⁵`), `0 ≤ độ cao ≤ 10⁵`.
+- Ràng buộc: `1 ≤ R, C ≤ 1000`, `0 ≤ độ cao ≤ 10⁵`.
 - Ví dụ: `[[1]]` → `[[0,0]]` · `[[2,1],[1,2]]` → `[[0,0],[0,1],[1,0],[1,1]]`. (LeetCode 417)
 
 ---
