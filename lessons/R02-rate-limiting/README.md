@@ -23,7 +23,7 @@ Token bucket:   thùng ≤ capacity, nạp refill/giây, mỗi request tốn 1  
 | Fixed window | O(1) | thấp | **2·limit** | Redis `INCR`+`EXPIRE`, quota ngày |
 | Sliding log | O(limit) | tuyệt đối | limit | API cần chặt, limit nhỏ |
 | Sliding counter | O(1) (2 số) | xấp xỉ (giả định đều trong cửa sổ trước) | ≈ limit | Cloudflare, gateway lớn |
-| Token bucket | O(1) | theo tốc độ trung bình | capacity (+ nạp thêm) | NGINX `limit_req burst`, nhiều gateway; Throttler của NestJS dùng fixed/sliding tùy storage |
+| Token bucket | O(1) | theo tốc độ trung bình | capacity (+ nạp thêm) | AWS API Gateway (throttling), nhiều gateway nội bộ; NGINX `limit_req` là biến thể leaky bucket |
 
 (Leaky bucket ≈ token bucket nhìn từ phía "xả": hàng đợi xả đều, dư thì bỏ.)
 
