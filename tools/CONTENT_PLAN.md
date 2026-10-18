@@ -24,7 +24,18 @@ Danh sách là **định hướng**: khi soạn được phép đổi/bổ sung 
 | I12 Trie | ✅ | 8 | Đúng kế hoạch; ex03 Perf chỉ bắt bản rất chậm (ghi trong đề); ex08 dùng `char` (đã thử Python/Java) |
 | I13 Bit manipulation | ✅ | 10 | Đúng kế hoạch; `isPowerOfTwo` nhận `long` tới 2⁵³ − 1 (bẫy `n & (n−1)` khi n ≥ 2³² trong TS); phần lớn bài không đo Perf |
 | I14 Math | ✅ | 10 | `modPow`: `exp`, `base` ≤ 2⁵³ − 1 (không phải 10¹⁸, vì input JSON → `number`); `nextCollision`: a, b ≤ 10⁷, t ≤ 10¹⁵ |
-| A01–A12 | ⬜ | 8–10 | |
+| A01 DP I: nền tảng | ✅ | 10 | `mincostTickets` mở rộng: ngày tới 10⁹, n ≤ 10⁵ (DP theo chỉ số + two pointers); `deleteAndEarn` n ≤ 10⁵ |
+| A02 DP II: 1D & sequence | ✅ | 10 | `change`, `numDecodings` trả mod 10⁹+7 (đề có n lớn); `maxProduct` ràng buộc mỗi phần tử có trị tuyệt đối ≤ 2 để tích vừa int; `wordBreak` độ dài s ≤ 10⁵, từ ≤ 20 ký tự |
+| A03 DP III: 2D & string | ✅ | 10 | `uniquePaths`, `uniquePathsWithObstacles` mod 10⁹+7 (lưới 1000²); `diffLines` đặc tả quy tắc tie thành thuật toán duy nhất (xóa trước thêm); `longestPalindrome` dùng compare |
+| A04 DP IV: knapsack | ✅ | 8 | `findTargetSumWays`, `combinationSum4` mod 10⁹+7; `minCoinsBounded` dùng binary splitting (trải phẳng từng tờ bị Perf bắt) |
+| A05 DP V: interval/tree/bitmask/digit | ✅ | 8 | Bài cây giới hạn n ≤ 5000 node (đệ quy an toàn cả 3 ngôn ngữ; cây 10⁵ node để tự làm); `tsp` đồ thị có hướng/không đối xứng, n ≤ 15; `countDigitOne` kèm `countDigitOneDP` (digit DP) trong solutions |
+| A06 Shortest paths | ✅ | 8 | `networkDelayTime` đánh số 1..n như LC; `swimInWater` lưới chữ nhật R×C, giá trị không cần khác nhau; Dijkstra dùng `Heap` import từ I04 |
+| A07 MST & graph nâng cao | ✅ | 8 | Chép DSU tối giản vào solutions; `mstWeight`, `minCostConnectPoints`, `minimumCost` trả `long`; `criticalConnections`/`circularServiceGroups` chuẩn hóa đầu ra (cạnh [min,max] tăng dần; nhóm tăng dần theo phần tử nhỏ nhất); bài DFS đệ quy n ≤ 5000; `minCostConnectPoints` n ≤ 2000 để Prim O(n²) khác Kruskal; `minimumCost` giải bằng Prim-heap (đối chiếu ex01 Kruskal) |
+| A08 Fenwick & Segment tree | ✅ | 8 | `sumRange`, `countRangeSum`, `reversePairs` trả `long`; `RangeAddSum.add(l, r, long v)` (v có trị tuyệt đối ≤ 10⁴); `MyCalendarThree` là segment tree động, ≤ 3·10⁴ lần gọi |
+| A09 String algorithms | ✅ | 8 | `zFunction` quy ước z[0] = n; rolling hash có `mulmod` tách bit (JS vượt 2⁵³) và kiểm chứng khi hash trùng; case lớn (10⁶) chỉ ở Perf, case cố định dùng kích thước vừa để bản thô vẫn chạy xong và bị Perf bắt |
+| A10 Binary search on answer | ✅ | 8 | `splitArray` trả `long` (n, nums tới 10⁵, 10⁹); `minmaxGasDist` k tới 10⁹ (mô phỏng heap không khả thi), sai số tuyệt đối 10⁻⁶ |
+| A11 Sweep line | ✅ | 8 | `canAccommodate` đổi thành đơn đặt phòng có số phòng yêu cầu `[checkIn, checkOut, roomsNeeded]` (có trọng số, khác `maxConcurrent`); `MyCalendarTwo` không đo Perf (≤ 3000 lần gọi, O(k) mỗi lần) |
+| A12 Amortized & randomized | ✅ | 8 | `reservoirSample` chuyển từ compare sang RNG Park–Miller đặc tả trong đề (so exact, tất định 3 ngôn ngữ); `RandomizedSet` chấm bằng mô phỏng + kiểm tra getRandom không hằng; `quickSelect` Perf dùng mảng 3 giá trị (bắt partition 2-way); `wiggleSortII` kiểm tra bằng compare, gen kiểm tồn tại nghiệm bằng vét cạn |
 | P01 Pattern recognition | ✅ | 20 đề | README + exercises.md (20 đề) + solutions.md (không có checks.ts) |
 | P02 Interview framework | ✅ | 3 | `solutions.ts` kèm transcript 7 bước; ex03 có test cụm 10⁵ ô (đệ quy tràn stack) |
 | P03 Scale effects trong JS | ✅ | 10 thí nghiệm | `benchOnly`; `experiments.ts` (22 hàm) + `verify.ts`; `solutions.md` ghi số đo thật + Python/Java |
@@ -217,10 +228,10 @@ README: state → transition → base → thứ tự tính; memo vs tabulation; 
 6. `int findTheCity(int n, int[][] edges, int distanceThreshold)` — LC 1334 (Floyd).  7. 🔴 `long[] shippingCost(int n, int[][] roads, int warehouse)` — n, m ≤ 2·10⁵, −1 nếu không tới.  8. 🔴 `int swimInWater(int[][] grid)` — LC 778.
 
 ### A07 · MST & graph nâng cao
-1. `long mstWeight(int n, int[][] edges)` — Kruskal, không liên thông → −1.  2. `int minCostConnectPoints(int[][] points)` — LC 1584 (Prim O(n²)).
+1. `long mstWeight(int n, int[][] edges)` — Kruskal, không liên thông → −1.  2. `long minCostConnectPoints(int[][] points)` — LC 1584 (Prim O(n²), n ≤ 2000).
 3. `List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections)` — LC 1192 (cầu).  4. `List<Integer> articulationPoints(int n, int[][] edges)` — tăng dần.
 5. `int countSCC(int n, int[][] edges)`.  6. `List<String> findItinerary(List<List<String>> tickets)` — LC 332 (Euler, Hierholzer).
-7. 🔴 `int minimumCost(int n, int[][] connections)` — LC 1135.  8. 🔴 `List<List<Integer>> circularServiceGroups(int n, int[][] deps)` — nhóm service phụ thuộc vòng (SCC kích thước ≥ 2), unordered-deep, mỗi nhóm tăng dần.
+7. 🔴 `long minimumCost(int n, int[][] connections)` — LC 1135 (làm bằng Prim-heap).  8. 🔴 `List<List<Integer>> circularServiceGroups(int n, int[][] deps)` — nhóm service phụ thuộc vòng (SCC kích thước ≥ 2), unordered-deep, mỗi nhóm tăng dần.
 
 ### A08 · Fenwick & Segment tree
 1. `class NumArrayMutable { NumArrayMutable(int[] nums); void update(int index, int val); long sumRange(int left, int right) }` — LC 307 (Fenwick).
@@ -243,14 +254,14 @@ README: state → transition → base → thứ tự tính; memo vs tabulation; 
 1. `int maxConcurrent(int[][] intervals)` — tọa độ tới 10⁹ (sort sự kiện, end trước start).  2. `List<List<Integer>> getSkyline(int[][] buildings)` — LC 218.
 3. `int[][] employeeFreeTime(int[][][] schedule)` — LC 759 (input mảng 3 chiều `int[][][]`).  4. `class MyCalendar { MyCalendar(); boolean book(int start, int end) }` — LC 729.
 5. `class MyCalendarTwo { MyCalendarTwo(); boolean book(int start, int end) }` — LC 731.  6. `int rectangleArea(int[][] rectangles)` — LC 850 (mod).
-7. 🔴 `boolean canAccommodate(int[][] bookings, int rooms)` — khách sạn, ngày tới 10⁹.  8. 🔴 `int[] minAvailableDuration(int[][] slots1, int[][] slots2, int duration)` — LC 1229.
+7. 🔴 `boolean canAccommodate(int[][] bookings, int rooms)` — khách sạn, mỗi đơn `[checkIn, checkOut, roomsNeeded]`, ngày tới 10⁹ (có trọng số).  8. 🔴 `int[] minAvailableDuration(int[][] slots1, int[][] slots2, int duration)` — LC 1229.
 
 ### A12 · Amortized & randomized
 1. `int quickSelect(int[] nums, int k)` — phần tử nhỏ thứ k, O(n) kỳ vọng.  2. `void wiggleSortII(int[] nums)` — LC 324 (compare kiểm tra hợp lệ).
 3. `class DynamicArray { DynamicArray(); void push(int x); int pop(); int get(int i); int capacity() }` — tự cài, capacity bắt đầu 1, gấp đôi khi đầy, giảm nửa khi size ≤ capacity/4.
 4. `class RandomizedSet { RandomizedSet(); boolean insert(int val); boolean remove(int val); int getRandom() }` — LC 380 (compare: getRandom trả phần tử đang có).
 5. `class Skiplist { Skiplist(); boolean search(int target); void add(int num); boolean erase(int num) }` — LC 1206.
-6. `int[] reservoirSample(int[] stream, int k, int seed)` — compare: k phần tử khác vị trí lấy từ stream.
+6. `int[] reservoirSample(int[] stream, int k, int seed)` — Algorithm R với RNG Park–Miller (`state = state·48271 mod 2³¹−1`) đặc tả trong đề ⇒ so exact (không dùng compare).
 7. `int[] topKQuickselect(int[] nums, int k)` — k lớn nhất, thứ tự tùy ý.  8. 🔴 `String reorganizeString(String s)` — LC 767, playlist không 2 bài cùng nghệ sĩ liền nhau (compare kiểm tra hợp lệ; không được → `""`).
 
 ## Tier P (định dạng đặc biệt)
