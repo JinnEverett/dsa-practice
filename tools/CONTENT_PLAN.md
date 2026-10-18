@@ -27,8 +27,17 @@ Danh sách là **định hướng**: khi soạn được phép đổi/bổ sung 
 | A01–A12 | ⬜ | 8–10 | |
 | P01–P07 | ⬜ | xem dưới | định dạng đặc biệt |
 | R01–R10 | ⬜ | 5 | phần lớn là class |
-| D01–D10 | ⬜ | 2 + DESIGN.md mẫu | |
-| CAP | ⬜ | 1 class lớn + DESIGN.md | |
+| D01 Phương pháp | ✅ | 2 + DESIGN.md | `MaxStack` (LC 716) + `FreqStack` (LC 895, 🔴); DESIGN mẫu đầy đủ 7 bước cho MaxStack |
+| D02 LRU & LFU | ✅ | 2 + DESIGN.md | `LRUCache` (DLL), `LFUCache`; DESIGN mẫu cho LRU |
+| D03 Hit counter & rate limiter | ✅ | 2 + DESIGN.md | `HitCounter`, `PerUserLimiter(int limit, long windowMs, int maxUsers)` (🔴); đáp án dùng DLL (xem ghi chú trong solutions: `Map.keys().next()` chậm hơn) |
+| D04 Time-based KV | ✅ | 2 + DESIGN.md | `TimeMap`, `SnapshotArray` (🔴, “cấu hình có phiên bản”) |
+| D05 RandomizedCollection & iterators | ✅ | 3 + DESIGN.md | thêm bài thứ 3: `RandomizedCollection` (compare mô phỏng + thống kê), `PeekingIterator`, `ZigzagIterator` (🔴); ex02/ex03 không có Perf (ghi “tự giác” trong exercises) |
+| D06 Leaderboard | ✅ | 2 + DESIGN.md | `Leaderboard` (`long top(int K)`), `RankBoard`; cài `SortedKeys` (danh sách chia khối) trong solutions; thêm case lớn để chạm đường tách khối |
+| D07 Router / file system | ✅ | 2 + DESIGN.md | `Router` (🔴, ex01), `FileSystem` (ex02, LC 588) |
+| D08 Task scheduler & timer | ✅ | 2 + DESIGN.md | `TaskScheduler` (thêm `scheduleEvery` cho việc lặp lại, 🔴), `TaskManager` (LC 3408); dùng `Heap` I04 |
+| D09 Ordered map | ✅ | 2 + DESIGN.md | `OrderedMap` bằng `IndexedSkipList` có span (export để CAP dùng) + `MyCalendar` (LC 729, 🔴); README có bảng bench skip list vs mảng sort |
+| D10 Text buffer & undo/redo | ✅ | 2 + DESIGN.md | `TextEditor` (LC 2296), `UndoRedo(int maxHistory)` (🔴); lệnh `"+text"` / `"-k"` |
+| CAP mini-Redis | ✅ | 2 + DESIGN.md | `MiniKV` (chuỗi + TTL + LRU) rồi `MiniRedis` (thêm list, sorted set, kiểu khóa); `setTime(now)` thay cho `now` từng lệnh; `del` đổi tên `delete` (từ khóa Python) |
 
 ---
 
@@ -253,6 +262,8 @@ README: state → transition → base → thứ tự tính; memo vs tabulation; 
 - **R10 Geo & spatial:** `String geohash(double lat, double lon, int precision)`; `double haversineKm(...)`; `class GridIndex { add(int id, double x, double y); move(...); List<Integer> withinRadius(double x, double y, double r) }`; `int[] kNearest(int[][] pts, int x, int y, int k)`; 🔴 `class DriverIndex` (cập nhật vị trí liên tục + truy vấn tài xế gần nhất).
 
 ## Tier D (mỗi module: `DESIGN.md` mẫu theo khung 7 bước của skill dsa-design + 2 bài class có checks)
+
+> Đã soạn xong (nhánh `content/d`): xem bảng trạng thái và `tools/reports/d.md`. `DESIGN.md` nằm trong chính thư mục `lessons/<ID>-<slug>/` (khác `designs/` là nơi người học nộp thiết kế của họ).
 
 - **D01 Phương pháp:** `MaxStack` (LC 716) + DESIGN.md mẫu đầy đủ làm ví dụ cho các module sau.
 - **D02 LRU & LFU:** `LRUCache` bằng DLL tự cài; `LFUCache` (LC 460).
