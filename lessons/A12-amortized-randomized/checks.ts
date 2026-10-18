@@ -259,7 +259,7 @@ export const specs: Record<string, Spec> = {
       return [ops, args];
     },
     stress: { minN: 1 },
-    perf: { n: 1e5, limitMs: 400 },
+    perf: { n: 150000, limitMs: 700 },
   },
   '06': {
     sig: 'int[] reservoirSample(int[] stream, int k, int seed)',

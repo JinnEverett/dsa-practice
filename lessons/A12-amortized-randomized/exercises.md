@@ -65,7 +65,7 @@ class Skiplist {
   boolean erase(int num)      // xóa MỘT bản của num; false nếu không có
 }
 ```
-- Ràng buộc: tối đa `10⁵` lần gọi, `0 ≤ num, target ≤ 10⁶`.
+- Ràng buộc: tối đa `1.5·10⁵` lần gọi, `0 ≤ num, target ≤ 10⁶`.
 - Ví dụ: `add(1), add(2), add(3), search(0)=false, add(4), search(1)=true, erase(0)=false, erase(1)=true, search(1)=false`. (LeetCode 1206)
 - Kết quả đúng **không phụ thuộc** random, nên so sánh chính xác. Mục tiêu: O(log n) kỳ vọng — cài skip list thật (tầng ngẫu nhiên, p = 1/2), hoặc cấu trúc sắp thứ tự khác nếu bạn muốn so sánh.
 
