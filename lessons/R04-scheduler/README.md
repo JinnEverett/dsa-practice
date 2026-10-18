@@ -60,4 +60,4 @@ Thay vì `for t = 0..T` (T có thể 10⁶ giây), giữ các heap sự kiện v
 | simulateJobQueue | O(E log n), E = #sự kiện | O(n) |
 
 ## 9. Câu hỏi quy mô
-Bạn có 10⁶ timeout 30 giây (ghi lại mỗi giây). So sánh bằng lý thuyết heap và timer wheel (S = 64 ô × 1 giây ×...): số phép tương tác mỗi giây là bao nhiêu? Rồi `bench` ex01 và ex03 ở `--scales m,l` và đối chiếu số mũ.
+Bạn có 10⁶ timeout 30 giây, mỗi giây thêm ~3·10⁴ cái mới. Heap tốn cỡ log₂(10⁶) ≈ 20 bước cho mỗi `add` và mỗi lần nổ; timer wheel 32 ô × 1 giây tốn O(1). Dự đoán tỉ lệ thời gian, rồi `bench` ex01 và ex03 ở `--scales m,l` và đối chiếu số mũ.
