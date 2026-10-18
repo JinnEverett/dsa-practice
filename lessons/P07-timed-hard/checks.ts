@@ -9,7 +9,7 @@ function bruteBuses(routes: number[][], source: number, target: number): number 
   if (source === target) return 0;
   const R = routes.length;
   const sets = routes.map((r) => new Set(r));
-  const INF = 1e9;
+  const INF: number = 1e9;
   const d = Array.from({ length: R }, (_, i) => Array.from({ length: R }, (_, j) => (i === j ? 0 : INF)));
   for (let i = 0; i < R; i++) for (let j = 0; j < R; j++) if (i !== j && routes[i].some((x) => sets[j].has(x))) d[i][j] = 1;
   for (let k = 0; k < R; k++) for (let i = 0; i < R; i++) for (let j = 0; j < R; j++) if (d[i][k] + d[k][j] < d[i][j]) d[i][j] = d[i][k] + d[k][j];
