@@ -41,7 +41,7 @@ long trap(int[] height)
 ```
 - Bản đồ độ cao; lượng nước giữ lại giữa các cột sau mưa. Ràng buộc: `1 ≤ n ≤ 10⁵`, `0 ≤ height[i] ≤ 10⁵` (tổng tới 10¹⁰ → `long`).
 - Ví dụ: `[0,1,0,2,1,0,1,3,2,1,2,1]` → `6` · `[4,2,0,3,2,5]` → `9`. (LeetCode 42, kiểu trả về `long`)
-- Yêu cầu thử cả hai cách: stack, và hai con trỏ (O(1) bộ nhớ). Chỉ stack được chấm khác nhau; cả hai đều qua `check`.
+- Nên thử cả hai cách: stack, và hai con trỏ trái/phải (O(1) bộ nhớ); cả hai đều qua `check`.
 
 ---
 
