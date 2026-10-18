@@ -29,10 +29,10 @@
 ```mermaid
 flowchart LR
     subgraph T2[tầng 2]
-      H2((head)) -- "span 3" --> A2((20)) -- "span 3" --> B2((50))
+      H2((head)) -- "span 2" --> A2((20)) -- "span 3" --> B2((50))
     end
     subgraph T1[tầng 1]
-      H1((head)) -- "span 1" --> X1((10)) -- "span 2" --> A1((20)) -- "span 3" --> B1((50))
+      H1((head)) -- "span 1" --> X1((10)) -- "span 1" --> A1((20)) -- "span 3" --> B1((50))
     end
     subgraph T0[tầng 0]
       H0((head)) --> N10((10)) --> N20((20)) --> N30((30)) --> N40((40)) --> N50((50))
