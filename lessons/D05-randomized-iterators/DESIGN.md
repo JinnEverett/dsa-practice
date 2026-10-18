@@ -61,7 +61,7 @@ sequenceDiagram
 | Space | O(n) | mảng n ô + n chỉ số trong các Set |
 
 ## 6. Cài đặt & stress test
-- `solutions.ts` → `RandomizedCollection`. Vì `getRandom` ngẫu nhiên, checker **mô phỏng lại** chuỗi thao tác (multiset đếm) để kiểm: boolean đúng, mỗi `getRandom` thuộc tập, và đợt `getRandom` ≥ 600 lần liên tiếp có tần suất ≈ `count/n` (±6σ). Thử một bản "chọn theo khóa phân biệt": bị bắt ở case phân phối (giá trị 1 xuất hiện 1555/3000 thay vì ≈ 2000).
+- `solutions.ts` → `RandomizedCollection`. Vì `getRandom` ngẫu nhiên, checker **mô phỏng lại** chuỗi thao tác (multiset đếm) để kiểm: boolean đúng, mỗi `getRandom` thuộc tập, và đợt `getRandom` ≥ 600 lần liên tiếp có tần suất ≈ `count/n` (±6σ). Thử một bản "chọn theo khóa phân biệt": bị bắt ở case phân phối (giá trị 1 xuất hiện 497/1000 thay vì ≈ 667).
 - Bản ngây thơ `indexOf + splice` bị Perf bắt (2234 ms trong khi giới hạn 250 ms).
 - `node tools/bench.ts lessons/D05-randomized-iterators 01 --src solutions --scales s,m,l`:
 

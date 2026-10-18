@@ -35,7 +35,7 @@ Iterator trả phần tử **theo yêu cầu**, không dựng sẵn toàn bộ. 
 |---|---|
 | **Peeking** | giữ 1 phần tử đã đọc trước (`cache`) để `peek()` không làm tiến nguồn |
 | **Zigzag / round-robin** | queue các nguồn còn phần tử; lấy một nguồn từ đầu hàng, đọc 1 phần tử, nguồn còn thì đẩy lại cuối hàng |
-| **Flatten lồng nhau** | stack các iterator con; `hasNext` đào xuống tới khi gặp số (tiếp tục ở D05 mở rộng/LeetCode 341) |
+| **Flatten lồng nhau** (mở rộng, LeetCode 341) | stack các iterator con; `hasNext` đào xuống tới khi gặp số |
 
 Zigzag bằng queue tự động tổng quát cho **k nguồn** (follow-up kinh điển) mà không đổi code.
 
