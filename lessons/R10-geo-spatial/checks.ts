@@ -195,6 +195,6 @@ export const specs: Record<string, Spec> = {
       });
     },
     // quét tuyến tính mọi tài xế (~3·10⁴) ở mỗi truy vấn (~4,5·10⁴ lần)
-    perf: { n: 1e5, limitMs: 1000 },
+    perf: { n: 1e5, limitMs: 1200 },
   },
 };

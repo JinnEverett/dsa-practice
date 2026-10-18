@@ -116,6 +116,7 @@ export class CountMinSketch {
 // Độ phức tạp: add O(1) · estimate O(m) · bộ nhớ m byte — đếm 10⁹ phần tử khác nhau chỉ với vài KB, sai số chuẩn ≈ 1,04/√m.
 // Bẫy: ρ tính sai (đếm cả b bit cao đã dùng làm idx); quên linear counting khi n nhỏ (sai số lớn); dùng `Math.clz32`.
 // Java: `Integer.numberOfLeadingZeros`; Python: `x.bit_length()` — ρ = (32 − b) − w.bit_length() + 1.
+const INV_POW2 = Array.from({ length: 34 }, (_, r) => 2 ** -r); // 2^(−ρ), ρ ≤ 33
 export class HyperLogLog {
   private b: number;
   private m: number;
@@ -137,7 +138,7 @@ export class HyperLogLog {
     let sum = 0;
     let zeros = 0;
     for (let j = 0; j < m; j++) {
-      sum += Math.pow(2, -this.reg[j]);
+      sum += INV_POW2[this.reg[j]];
       if (this.reg[j] === 0) zeros++;
     }
     const alpha = m === 16 ? 0.673 : m === 32 ? 0.697 : m === 64 ? 0.709 : 0.7213 / (1 + 1.079 / m);

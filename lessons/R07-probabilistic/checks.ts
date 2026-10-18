@@ -161,7 +161,7 @@ export const specs: Record<string, Spec> = {
       let tick = 0;
       return opsGen('HyperLogLog', [big ? 12 : r.int(4, 6)], Math.max(1, n), () => (r.bool(big ? 0.99 : 0.7) ? ['add', ['user' + r.int(0, pool - 1)]] : (tick++, ['estimate', []])));
     },
-    perf: { n: 1e5, limitMs: 200 },
+    perf: { n: 1e5, limitMs: 150 },
   },
   '05': {
     sig: 'long[] bloomParams(int n, double p)',

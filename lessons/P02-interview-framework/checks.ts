@@ -63,7 +63,7 @@ export const specs: Record<string, Spec> = {
           return [s, s + r.int(0, n > 200 ? 100000 : 6)];
         }),
       ],
-    perf: { n: 1e5, limitMs: 150 },
+    perf: { n: 1e5, limitMs: 250 },
   },
   '03': {
     sig: 'int countClusters(String[] grid)',

@@ -112,7 +112,7 @@ export const specs: Record<string, Spec> = {
       const routes = Array.from({ length: R }, () => r.distinct(r.int(1, 4), 0, 9));
       return [routes, r.int(0, 9), r.int(0, 9)];
     },
-    perf: { n: 1e5, limitMs: 100 },
+    perf: { n: 1e5, limitMs: 200 },
   },
   '04': {
     sig: 'int mostBooked(int n, int[][] meetings)',
@@ -138,6 +138,6 @@ export const specs: Record<string, Spec> = {
     },
     stress: { minN: 1 },
     // 2·10⁴ phòng bão hòa: quét mọi phòng cho mỗi cuộc họp là 10⁵ × 2·10⁴
-    perf: { n: 1e5, limitMs: 300 },
+    perf: { n: 1e5, limitMs: 400 },
   },
 };

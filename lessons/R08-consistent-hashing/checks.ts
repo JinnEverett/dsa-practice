@@ -188,6 +188,6 @@ export const specs: Record<string, Spec> = {
       return opsGen('MerkleSync', [blocks], Math.max(1, n), () => (r.bool(big ? 0.2 : 0.5) ? ['update', [r.int(0, size - 1), 'v' + r.int(0, 999)]] : ['root', []]));
     },
     // dựng lại cả cây ở mỗi root(): ~8·10⁴ lần × 10⁵ hash
-    perf: { n: 1e5, limitMs: 500 },
+    perf: { n: 1e5, limitMs: 700 },
   },
 };

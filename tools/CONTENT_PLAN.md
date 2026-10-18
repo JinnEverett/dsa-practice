@@ -25,8 +25,23 @@ Danh sách là **định hướng**: khi soạn được phép đổi/bổ sung 
 | I13 Bit manipulation | ⬜ | 10 | |
 | I14 Math | ⬜ | 10 | |
 | A01–A12 | ⬜ | 8–10 | |
-| P01–P07 | ⬜ | xem dưới | định dạng đặc biệt |
-| R01–R10 | ⬜ | 5 | phần lớn là class |
+| P01 Pattern recognition | ✅ | 20 đề | README + exercises.md (20 đề) + solutions.md (không có checks.ts) |
+| P02 Interview framework | ✅ | 3 | `solutions.ts` kèm transcript 7 bước; ex03 có test cụm 10⁵ ô (đệ quy tràn stack) |
+| P03 Scale effects trong JS | ✅ | 10 thí nghiệm | `benchOnly`; `experiments.ts` (22 hàm) + `verify.ts`; `solutions.md` ghi số đo thật + Python/Java |
+| P04 Testing & stress test | ✅ | 8 | `bugs/bugNN.{ts,py,java}` là code lỗi (đã kiểm chứng `check` báo SAI); phần stress tự viết không chấm máy |
+| P05 Timed Easy | ✅ | 6 | LC 169, 121, 392, 228, 496, 409 (viết lại bối cảnh) |
+| P06 Timed Medium | ✅ | 5 | LC 621, 863, 909, 523, 334 |
+| P07 Timed Hard | ✅ | 4 | LC 4, 10, 815, 2402 |
+| R01 Cache | ✅ | 5 | LRU, TTL (heap + lazy deletion), hit ratio LRU vs FIFO, PriceCache có invalidate theo category, LRU bằng DLL (`keys()` để kiểm tra thứ tự) |
+| R02 Rate limiting | ✅ | 5 | Fixed/Sliding log/Sliding counter/Token bucket (mili-token nguyên) + `compareLimiters` trả 8 số (allowed + burst thực) |
+| R03 Feed, top-K, stream | ✅ | 5 | ex01 đổi từ hàm `feedPage` sang class `FeedMerger` (để đo được truy vấn lặp); `TopKCounter`, `Trending`, `mergeTimelines` |
+| R04 Scheduler & delayed queue | ✅ | 5 | `DelayQueue`, `retrySchedule(attempts, base, cap, deadline)` (mốc cộng dồn), `TimerWheel`, `nextRun`, `simulateJobQueue` |
+| R05 Dependency resolution | ✅ | 5 | `resolve` (tie-break theo thứ tự khai báo), `findCycle`, `buildLevels`, `initProviders` (kiểu NestJS), `maxSatisfying` |
+| R06 Search & autocomplete | ✅ | 5 | ex01 là `Suggest(k)` có weight (tránh trùng `Autocomplete` của I12); `SearchIndex`, `fuzzyMatch`, `searchVietnamese`, `BKTree` |
+| R07 Probabilistic DS | ✅ | 5 | hash đặc tả `g = fmix32(fnv1a32)`; `falsePositiveRate` gộp thành `measureBloom`; `bloomParams` trả `long[]` |
+| R08 Consistent hashing & Merkle | ✅ | 5 | `diffBlocks` thay bằng class `MerkleSync` (update O(log n)) để perf phân biệt được |
+| R09 Diff, dedup & stream | ✅ | 5 | ex01 là `myersDistance` (tránh trùng `diffLines` của A03); `Dedup`, `P95Window`, `sessionize`, `sampleLog` (LCG đặc tả) |
+| R10 Geo & spatial | ✅ | 5 | `geohash`, `haversineKm`, `GridIndex`, `kNearest`, `DriverIndex` |
 | D01–D10 | ⬜ | 2 + DESIGN.md mẫu | |
 | CAP | ⬜ | 1 class lớn + DESIGN.md | |
 
