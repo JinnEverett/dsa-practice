@@ -65,7 +65,7 @@ sequenceDiagram
 ## 6. Cài đặt & stress test
 - `solutions.ts` → `Router` (DFS có quay lui); brute `NaiveRouter` thử mọi mẫu và chọn mẫu nhỏ nhất theo vector ưu tiên (tĩnh 0 < param 1 < wild 2) — cài đặt *độc lập* với trie, nên stress kiểm chứng cả quy tắc ưu tiên.
 - Stress: 300 chuỗi `add`/`match` ngẫu nhiên trên bảng chữ {a, b, c} (rất nhiều va chạm và quay lui).
-- Bản quét tuyến tính (brute) trượt Perf: ~32 s cho `10⁵` thao tác khi giới hạn hiệu lực là 2,1 s; ref ~54 ms.
+- Bản quét tuyến tính (brute) trượt Perf: ~29 s cho `10⁵` thao tác (đã đo) khi giới hạn hiệu lực là 2,1 s; ref ~54 ms.
 - `node tools/bench.ts lessons/D07-router-filesystem 01 --src solutions --scales s,m,l`:
 
 | n | median | số mũ | heap |
