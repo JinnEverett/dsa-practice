@@ -1,0 +1,19 @@
+{
+  "name": "dsa-practice",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "check": "node tools/check.ts",
+    "bench": "node tools/bench.ts",
+    "verify": "node tools/check.ts --all --src solutions --quiet",
+    "scaffold": "node tools/scaffold.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^24.19.2",
+    "typescript": "5.9"
+  }
+}

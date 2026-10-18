@@ -1,0 +1,8 @@
+node_modules/
+tools/runners/java/out/
+__pycache__/
+*.class
+.claude/worktrees/
+.claude/settings.local.json
+*.log
+.env
